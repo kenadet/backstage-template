@@ -1,0 +1,32 @@
+apiVersion: backstage.io/v1alpha1
+kind: Template
+metadata:
+  name: Data Contract Template
+  title: Data Contract
+  description: This template generates a catalog-info.yaml file for a new data contract.
+spec:
+  owner: team@example.com
+  parameters:
+    - title: Name
+      required: true
+      type: string
+      name: name
+      description: "Name of the Data Contract"
+    - title: Description
+      required: false
+      type: string
+      name: description
+      description: "Description of Data Contract"
+    - title: Owner
+      required: true
+      type: string
+      name: owner
+      description: "The owner of the Data Contract (team)"
+  steps:
+    - id: generate-catalog-info
+      name: Generate catalog-info.yaml
+      action: custom:generate-catalog-info
+      input:
+        name: ${{ parameters.name }}
+        description: ${{ parameters.description }}
+        owner: ${{ parameters.owner }}
